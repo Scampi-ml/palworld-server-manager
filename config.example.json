@@ -3,7 +3,6 @@
     "steamcmd_dir": "steamcmd",
     "install_dir": "server",
     "server_exe": "server/PalServer.exe",
-    "shipping_exe": "server/Pal/Binaries/Win64/PalServer-Win64-Shipping-Cmd.exe",
     "settings_file": "server/Pal/Saved/Config/WindowsServer/PalWorldSettings.ini",
     "server_id_file": "server/Pal/Saved/Config/WindowsServer/GameUserSettings.ini",
     "backup_source": "server/Pal/Saved",
@@ -28,6 +27,7 @@
     "stale_save_announce": "Server restarting due to stale save file in 30 seconds!",
     "stale_save_shutdown": "Restarting due to stale save.",
     "manual_stop": "Server stopped by administrator.",
-    "default_shutdown": "Server shutting down."
+    "default_shutdown": "Server shutting down.",
+    "no_install": "Start the server to install Palworld server using SteamCMD"
   }
 }

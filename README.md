@@ -15,9 +15,11 @@ Based on [deafdudecomputers/PalworldServer](https://github.com/deafdudecomputers
 1. Clone this repository.
 2. Copy `config.example.json` to `config.json` (or run once and the manager will copy it for you).
 3. Edit `config.json` if you need different paths or restart time (default daily restart: `05:00` local time).
-4. Double-click `start_server.cmd`.
+4. Double-click `start_manager.cmd` to open the manager GUI.
 5. Click **Start Server** and let SteamCMD download the dedicated server on first run.
 6. After the first boot, stop the server and configure `server/Pal/Saved/Config/WindowsServer/PalWorldSettings.ini`.
+
+The main configuration file is `PalWorldSettings.ini`. Palworld creates it empty on first boot — that is normal. The manager seeds it from `DefaultPalWorldSettings.ini` when empty (and sets `RESTAPIEnabled=True`). Other tiny/empty `.ini` files under `WindowsServer` are Unreal stubs and can be ignored.
 
 ### Required `PalWorldSettings.ini` settings
 
@@ -28,7 +30,7 @@ RESTAPIPort=8212
 PublicPort=8211
 ```
 
-The manager reads `AdminPassword`, `RESTAPIPort`, and `PublicPort` from this file. Stats and graceful stop/restart will not work if `AdminPassword` is empty or REST API is disabled.
+Stop the server before editing this file. The manager reads `AdminPassword`, `RESTAPIPort`, and `PublicPort` from it. On startup and when you click Start, it logs **Settings check: OK** if everything looks good, or detailed `WARN` lines when something is missing or wrong. Stats and graceful stop/restart will not work if `AdminPassword` is empty or REST API is disabled.
 
 Official REST API docs: [docs.palworldgame.com/category/rest-api](https://docs.palworldgame.com/category/rest-api/)
 
@@ -37,9 +39,8 @@ Official REST API docs: [docs.palworldgame.com/category/rest-api](https://docs.p
 | Key | Purpose |
 |-----|---------|
 | `paths.*` | Relative or absolute paths for SteamCMD, install, settings, backups, logs |
-| `paths.server_exe` | Launcher binary (default `server/PalServer.exe`) |
-| `paths.shipping_exe` | Long-lived process used for status/kill (`.../PalServer-Win64-Shipping-Cmd.exe`) |
-| `restart_time` | Daily restart clock time (`HH:MM`, local), e.g. `"05:00"` |
+| `paths.server_exe` | Server launcher (default `server/PalServer.exe`) |
+| `restart_time` | Daily restart clock time (`HH:MM` 24-hour local), e.g. `"05:00"` or `"17:00"`. Restart the manager after changing this. |
 | `server_address` | REST API host (usually `127.0.0.1`) |
 | `query_port` | Starting Steam query port (auto-increments if busy) |
 | `max_save_age_minutes` | Stale `Level.sav` threshold before forced restart checks |
@@ -58,6 +59,7 @@ Official REST API docs: [docs.palworldgame.com/category/rest-api](https://docs.p
 | `stale_save_announce` / `stale_save_shutdown` | Stale save restart |
 | `manual_stop` | Stop button / window close |
 | `default_shutdown` | Fallback shutdown text |
+| `no_install` | Popup when `paths.server_exe` is missing on manager startup |
 
 `config.json` is gitignored so local path overrides stay private. Commit `config.example.json` only.
 
@@ -67,14 +69,15 @@ Official REST API docs: [docs.palworldgame.com/category/rest-api](https://docs.p
 - Launch via visible `PalServer.exe` (console not hidden)
 - Daily restart at a fixed time from config, with in-game announce warnings
 - Graceful stop/restart: REST `save` → `shutdown`, then `stop`, then process kill as fallback
-- Player count from REST `/v1/api/players` (falls back to metrics)
+- Player count and online name list from REST `/v1/api/players` (count falls back to metrics)
 - Hourly zip backups of `Pal/Saved`
 - Crash and stale-save auto-restart
 - Optional `Engine.ini` performance overrides copied into the server config on update
 
 ## UI
 
-Shows **Status**, **Version**, **Players**, and **Next restart**. Start/Stop controls the dedicated process.
+Left: Start/Stop, daily restart time, live **Status** / **Version** / **Players**, and a scrollable online player list.  
+Right: full-height **Log**.
 
 ## What is not in git
 
