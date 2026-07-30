@@ -1,0 +1,33 @@
+{
+  "paths": {
+    "steamcmd_dir": "steamcmd",
+    "install_dir": "server",
+    "server_exe": "server/PalServer.exe",
+    "shipping_exe": "server/Pal/Binaries/Win64/PalServer-Win64-Shipping-Cmd.exe",
+    "settings_file": "server/Pal/Saved/Config/WindowsServer/PalWorldSettings.ini",
+    "server_id_file": "server/Pal/Saved/Config/WindowsServer/GameUserSettings.ini",
+    "backup_source": "server/Pal/Saved",
+    "backup_dir": "backups",
+    "log_dir": "logs",
+    "engine_ini": "Engine.ini"
+  },
+  "restart_time": "05:00",
+  "server_address": "127.0.0.1",
+  "query_port": "27015",
+  "max_save_age_minutes": 10,
+  "shutdown_wait_seconds": 60,
+  "messages": {
+    "restart_1h": "Server will restart in 1 hour!",
+    "restart_30m": "Server will restart in 30 minutes!",
+    "restart_10m": "Server will restart in 10 minutes! Please save your progress.",
+    "restart_minutes": "Server will restart in {minutes} minute(s)! Please save your progress.",
+    "restart_now": "Server restarting now!",
+    "daily_shutdown": "Daily scheduled restart.",
+    "update_announce": "Server restarting for update in 30 seconds!",
+    "update_shutdown": "Updating server, please reconnect shortly.",
+    "stale_save_announce": "Server restarting due to stale save file in 30 seconds!",
+    "stale_save_shutdown": "Restarting due to stale save.",
+    "manual_stop": "Server stopped by administrator.",
+    "default_shutdown": "Server shutting down."
+  }
+}

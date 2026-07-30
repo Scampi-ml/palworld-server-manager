@@ -1,0 +1,31 @@
+# Local upstream / reference install (keep on disk, never commit)
+Source/
+
+# Local test install
+test/
+
+# Local manager config (copy from config.example.json)
+config.json
+
+# Runtime Steam / server / data
+server/
+steamcmd/
+steamcmd.zip
+server_updates/
+backups/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
