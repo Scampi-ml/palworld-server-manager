@@ -73,6 +73,23 @@ Official REST API docs: [docs.palworldgame.com/category/rest-api](https://docs.p
 - Hourly zip backups of `Pal/Saved`
 - Crash and stale-save auto-restart
 - Optional `Engine.ini` performance overrides copied into the server config on update
+- Optional `player-log.ps1` — polls REST `/v1/api/players` every 5 minutes and appends online names to `logs/player_presence.txt` (skips empty snapshots)
+
+## Player presence log
+
+With the server running and REST enabled, start a background poller:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\player-log.ps1
+```
+
+It reads `AdminPassword` from `PalWorldSettings.ini` (user `admin`, same as the manager), queries `http://localhost:8212/v1/api/players`, and when anyone is online appends a line like:
+
+```text
+2026-08-10 17:14:00, Alice, Bob
+```
+
+No players → no write. Loops forever (Ctrl+C to stop). Log file: `logs/player_presence.txt`.
 
 ## UI
 
